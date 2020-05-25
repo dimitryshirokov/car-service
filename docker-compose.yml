@@ -34,6 +34,8 @@ services:
       - .docker/app/conf/my.ini:/usr/local/etc/php/php.ini
     environment:
       APPLICATION_ENV: dev
+    depends_on:
+      - car_service_db
     networks:
       - car_service
     domainname: car-service.local
