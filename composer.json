@@ -15,6 +15,7 @@
         "symfony/orm-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/yaml": "5.0.*",
+        "symfony/monolog-bundle": "*",
         "uma/json-rpc": "^2.1"
     },
     "require-dev": {
