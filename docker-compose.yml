@@ -1,0 +1,37 @@
+version: '2.4'
+
+networks:
+  car_service:
+    name: car_service
+    driver: bridge
+
+services:
+  car_service_app:
+    container_name: car_service_app
+    image: car-service-dev
+    volumes:
+      - .:/var/www/car-service/current
+      - ~/.ssh/:/home/www-data/.ssh/
+      - .docker/app/conf/my.ini:/usr/local/etc/php/php.ini
+    environment:
+      APPLICATION_ENV: dev
+    networks:
+      - car_service
+    domainname: car-service.local
+    hostname: app.car-service
+
+  car_service_nginx:
+    container_name: car_service_nginx
+    image: car-service-nginx
+    ports:
+      - ${NGINX_PORT}:8600
+    volumes:
+      - .:/var/www/car-service/current
+      - .docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - .docker/nginx/conf.d/car-service.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - car_service_app
+    networks:
+      - car_service
+    domainname: car-service.local
+    hostname: nginx.car-service

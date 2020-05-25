@@ -1,0 +1,12 @@
+services:
+  app.extractor.customer_extractor:
+    class: App\Extractor\CustomerExtractor
+
+  app.extractor.order_extractor:
+    class: App\Extractor\OrderExtractor
+
+  app.extractor.car_extractor:
+    class: App\Extractor\CarExtractor
+
+  app.extractor.employee_extractor:
+    class: App\Extractor\EmployeeExtractor

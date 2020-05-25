@@ -1,0 +1,152 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  app.method.create_employee:
+    class: App\API\Method\CreateEmployeeMethod
+    public: true
+    arguments:
+      $employeeService: '@app.service.employee_service'
+
+  app.method.get_positions:
+    class: App\API\Method\GetPositionsMethod
+    public: true
+
+  app.method.get_employers:
+    class: App\API\Method\GetEmployersMethod
+    public: true
+    arguments:
+      $employersService: '@app.service.employee_service'
+
+  app.method.create_work:
+    class: App\API\Method\CreateWorkMethod
+    public: true
+
+  app.method.get_works:
+    class: App\API\Method\GetWorksMethod
+    public: true
+
+  app.method.get_works_and_employers:
+    class: App\API\Method\GetWorksAndEmployersMethod
+    public: true
+
+  app.method.create_order:
+    class: App\API\Method\CreateOrderMethod
+    public: true
+
+  app.method.get_order:
+    class: App\API\Method\GetOrderMethod
+    public: true
+
+  app.method.create_customer:
+    class: App\API\Method\CreateCustomerMethod
+    public: true
+    arguments:
+      $customerService: '@app.service.customer_service'
+
+  app.method.get_customer:
+    class: App\API\Method\GetCustomerMethod
+    public: true
+    arguments:
+      $customerService: '@app.service.customer_service'
+
+  app.method.update_customer:
+    class: App\API\Method\UpdateCustomerMethod
+    public: true
+    arguments:
+      $customerService: '@app.service.customer_service'
+
+  app.method.find_customer:
+    class: App\API\Method\FindCustomerMethod
+    public: true
+    arguments:
+      $customerService: '@app.service.customer_service'
+
+  app.method.change_order_status:
+    class: App\API\Method\ChangeOrderStatusMethod
+    public: true
+
+  app.method.find_order:
+    class: App\API\Method\FindOrderMethod
+    public: true
+
+  app.method.get_orders:
+    class: App\API\Method\GetOrdersMethod
+    public: true
+
+  app.method.get_customers:
+    class: App\API\Method\GetCustomersMethod
+    public: true
+    arguments:
+      $customerService: '@app.service.customer_service'
+
+  app.method.create_car:
+    class: App\API\Method\CreateCarMethod
+    public: true
+
+  app.method.get_car:
+    class: App\API\Method\GetCarMethod
+    public: true
+
+  app.method.get_cars:
+    class: App\API\Method\GetCarsMethod
+    public: true
+
+  app.method.find_car:
+    class: App\API\Method\FindCarMethod
+    public: true
+
+  app.method.get_employee:
+    class: App\API\Method\GetEmployeeMethod
+    public: true
+    arguments:
+      $employeeService: '@app.service.employee_service'
+
+  app.method.update_employee:
+    class: App\API\Method\UpdateEmployeeMethod
+    public: true
+    arguments:
+      $employeeService: '@app.service.employee_service'
+
+  app.method.delete_employee:
+    class: App\API\Method\DeleteEmployeeMethod
+    public: true
+    arguments:
+      $employeeService: '@app.service.employee_service'
+
+  app.method.get_resume:
+    class: App\API\Method\GetResumeMethod
+    public: true
+
+  UMA\JsonRpc\Server:
+    class: UMA\JsonRpc\Server
+    public: true
+    factory: 'App\API\JsonRpcServerFactory::create'
+    arguments:
+      $container: '@service_container'
+      $methods:
+        createEmployee: app.method.create_employee
+        getPositions: app.method.get_positions
+        getEmployers: app.method.get_employers
+        createWork: app.method.create_work
+        getWorks: app.method.get_works
+        getWorksAndEmployers: app.method.get_works_and_employers
+        createOrder: app.method.create_order
+        getOrder: app.method.get_order
+        createCustomer: app.method.create_customer
+        getCustomer: app.method.get_customer
+        updateCustomer: app.method.update_customer
+        findCustomer: app.method.find_customer
+        changeOrderStatus: app.method.change_order_status
+        findOrder: app.method.find_order
+        getOrders: app.method.get_orders
+        getCustomers: app.method.get_customers
+        createCar: app.method.create_car
+        getCar: app.method.get_car
+        getCars: app.method.get_cars
+        findCar: app.method.find_car
+        getEmployee: app.method.get_employee
+        updateEmployee: app.method.update_employee
+        deleteEmployee: app.method.delete_employee
+        getResume: app.method.get_resume

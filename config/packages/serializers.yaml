@@ -1,0 +1,21 @@
+services:
+  app.normalizer.date_time_normalizer:
+    class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+
+  app.normalizer.get_set_normalizer:
+    class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+    arguments:
+      $classMetadataFactory: null
+      $nameConverter: null
+      $propertyTypeExtractor: null
+      $classDiscriminatorResolver: null
+      $objectClassResolver: null
+      $defaultContext:
+        circular_reference_handler: '@App\Utils\CircularReferenceHandler'
+
+  app.serializer:
+    class: Symfony\Component\Serializer\Serializer
+    arguments:
+      $normalizers:
+        - '@app.normalizer.date_time_normalizer'
+        - '@app.normalizer.get_set_normalizer'

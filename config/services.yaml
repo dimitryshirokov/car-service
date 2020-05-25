@@ -25,3 +25,30 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.service.employee_service:
+        class: App\Service\EmployeeService
+        arguments:
+            $hydrator: '@app.hydrator.employee_hydrator'
+            $extractor: '@app.extractor.employee_extractor'
+
+    app.service.customer_service:
+        class: App\Service\CustomerService
+        arguments:
+            $hydrator: '@app.hydrator.customer_hydrator'
+            $customerExtractor: '@app.extractor.customer_extractor'
+
+    App\Service\OrderService:
+        arguments:
+            $orderExtractor: '@app.extractor.order_extractor'
+
+    App\Service\CarService:
+        arguments:
+            $hydrator: '@app.hydrator.car_hydrator'
+            $extractor: '@app.extractor.car_extractor'
+
+imports:
+    - { resource: packages/json-rpc.yaml }
+    - { resource: packages/hydrators.yaml }
+    - { resource: packages/serializers.yaml }
+    - { resource: packages/extractors.yaml }
