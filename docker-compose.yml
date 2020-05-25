@@ -6,6 +6,25 @@ networks:
     driver: bridge
 
 services:
+  car_service_db:
+    container_name: car_service_db
+    image: percona:8.0
+    volumes:
+      - .docker/data/dbstorage:/var/lib/mysql
+      - .docker/db:/var/db
+    ports:
+      - ${MYSQL_PORT}:3306
+    working_dir: /var/db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: car_service
+      MYSQL_USER: car_service
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - car_service
+    domainname: car-service.local
+    hostname: db.car-service
+
   car_service_app:
     container_name: car_service_app
     image: car-service-dev
