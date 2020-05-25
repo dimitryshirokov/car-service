@@ -23,7 +23,7 @@ final class Version20200522172843 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE done_work ADD active TINYINT(1) NOT NULL');
-        $this->addSql('ALTER TABLE `order` ADD status VARCHAR(198) NOT NULL');
+        $this->addSql('ALTER TABLE `order` ADD status VARCHAR(127) NOT NULL');
     }
 
     public function down(Schema $schema) : void
